@@ -15,7 +15,13 @@ class MultiScheduleSerializer(serializers.ModelSerializer):
         fields ='__all__'
         list_serializer_class = CustomScheduleSerializer
 
-class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
+class ScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScheduleModel
+        fields = '__all__'
+
+
+class ListScheduleSerializer(serializers.BaseSerializer):
     class Meta:
         model = ScheduleModel
         fields = '__all__'

@@ -4,7 +4,8 @@ from .views import ScheduleViewSet, CreateScheduleViewSet
 
 router = routers.SimpleRouter()
 router.register(r'update_db', CreateScheduleViewSet)
-router.register(r'schedule', ScheduleViewSet)
+
+
 
 
 
@@ -12,5 +13,6 @@ router.register(r'schedule', ScheduleViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('list/<str:pk>', ScheduleViewSet.as_view({'get': 'list'})),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
