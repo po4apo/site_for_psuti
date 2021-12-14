@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+    Расписание
+{% endblock %}
+
+{% block nav_name %}
+    Расписание
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-3">
+            <form method="get">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Найти" class="btn btn-primary mb-2">
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    {% if object_list %}
+        <table class="table">
+            <!--Таблица для чётных-->
+            <thead>
+            <tr>
+
+                <th scope="col">День</th>
+                <th scope="col">Время</th>
+                <th scope="col">Предмет</th>
+                <th scope="col">Аудитория</th>
+                <th scope="col">Преподаватель</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in object_list %}
+                <tr>
+                    <th scope="col">{{ obj.weekday }}</th>
+                    <th scope="col">{{ obj.sub_time }}</th>
+                    <th scope="col">{{ obj.sub_name }}</th>
+                    <th scope="col">{{ obj.au_number }}</th>
+                    <th scope="col">{{ obj.teacher_name }}</th>
+                    <th scope="col">
+                            <input type="submit" onclick="window.location.href = '{% url 'report_page' %}?st_group={{ obj.st_group.0 }}&odd_even={{ obj.odd_even }}'" value="Тут ошибка" class="btn btn-warning">
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+
+
+
+        <input type="submit" onclick="window.location.href = '{% url 'report_page' %}?&st_group={{ request.GET.st_group }}'" value="Сообщить об ошибке" class="btn btn-warning">
+
+
+{% endblock %}
+
+
+

@@ -22,12 +22,23 @@ class ScheduleModel(models.Model):
     st_group = ArrayField(models.CharField(max_length=100),
                           null=True,
                           blank=True)       #: ["ИКТ-05"],
-    au_number = models.CharField(max_length=100,
+    au_number = ArrayField(models.CharField(max_length=100,
                           null=True,
-                          blank=True)                  #: "а. 8-02",
+                          blank=True),
+                           null=True,
+                           blank=True)                  #: "а. 8-02",
     odd_even = models.CharField(max_length=100,
                           null=True,
                           blank=True)                  # нужно вынести в отдельную таблицу: "чет"
 
     def __str__(self):
         return self.sub_name
+
+
+class ReportModel(models.Model):
+    description = models.TextField(verbose_name='Описание проблемы',)
+    st_group = models.CharField(max_length=100,
+                                verbose_name="Название группы")
+    odd_even = models.CharField(max_length=5,
+                                choices=[('even', 'чёт'), ('odd', 'нечёт')],
+                                verbose_name='Чётность')
