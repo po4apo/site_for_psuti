@@ -42,3 +42,7 @@ class ReportModel(models.Model):
     odd_even = models.CharField(max_length=5,
                                 choices=[('even', 'чёт'), ('odd', 'нечёт')],
                                 verbose_name='Чётность')
+
+
+    def __str__(self):
+        return self.st_group
